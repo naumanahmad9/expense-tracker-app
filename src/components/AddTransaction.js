@@ -16,9 +16,15 @@ export const AddTransaction = () => {
       amount: +amount,
     };
 
-    addTransaction(newTransaction);
-    setText("");
-    setAmount("");
+    if (newTransaction.text === "") {
+      alert("Please enter a name of transaction");
+    } else if (newTransaction.amount === 0) {
+      alert("Please enter a non zero number");
+    } else {
+      addTransaction(newTransaction);
+      setText("");
+      setAmount("");
+    }
   };
 
   return (
