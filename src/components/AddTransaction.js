@@ -3,9 +3,9 @@ import { GlobalContext } from "../context/GlobalState";
 
 export const AddTransaction = () => {
   const [text, setText] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
 
-  const { addTransaction } = useContext(GlobalContext);
+  const { addTransaction, clearTransaction } = useContext(GlobalContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +17,8 @@ export const AddTransaction = () => {
     };
 
     addTransaction(newTransaction);
+    setText("");
+    setAmount("");
   };
 
   return (
@@ -29,7 +31,8 @@ export const AddTransaction = () => {
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Enter text..."
+            placeholder="Enter transaction name"
+            requried
           />
         </div>
         <div className="form-control">
@@ -41,11 +44,15 @@ export const AddTransaction = () => {
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder="Enter amount..."
+            placeholder="Enter amount"
+            required
           />
         </div>
         <button className="btn">Add transaction</button>
       </form>
+      <button className="btn" onClick={clearTransaction}>
+        Clear transactions
+      </button>
     </>
   );
 };
